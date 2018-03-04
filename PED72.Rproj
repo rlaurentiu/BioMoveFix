@@ -1,0 +1,61 @@
+setwd("D:/biomovefix/PED72")
+require(dplyr)
+
+# citeste fisier Argos (export csv din Argos CLS)
+# exemplu fisier date Argos PTT Geotrack 23G SOLAR PTT
+Argos_data <- read.csv(file="ArgosData.csv", 
+                           header=TRUE, as.is=TRUE)
+
+# vizualizeaza datele (tip variabila, nume coloana, etc)
+
+glimpse(Argos_data)
+
+# sterge datele duplicate. Argos csv include date duplicate pentru fiecare
+# locatie
+
+argos.dup <- distinct(Argos_data, Platform.ID.No., Pass.dur...s., Sat., Loc..date, .keep_all = TRUE)
+
+# sterge datele cu NA la  in coloanele Loc..date, Longitude, Latitude)
+
+argos.dup.1 <-   filter(argos.dup, !is.na(Loc..date))
+argos.dup.2 <-   filter(argos.dup.1, !is.na(Longitude))
+argos.dup.3 <-   filter(argos.dup.2, !is.na(Latitude))
+
+# numarul de indivizi cu date PTT
+
+count(argos.dup.3, Platform.ID.No.)
+
+# selecteaza datele pentru cate fiecare PTT (i.e., fiecare animal)
+
+argos.34400 <- filter(argos.dup.3, Platform.ID.No. == 34400)
+argos.34403 <- filter(argos.dup.3, Platform.ID.No. == 34403)
+argos.34406 <- filter(argos.dup.3, Platform.ID.No. == 34406)
+argos.34407 <- filter(argos.dup.3, Platform.ID.No. == 34407)
+argos.34418 <- filter(argos.dup.3, Platform.ID.No. == 34418)
+
+
+# reprezentare puncte (PTT 34400, exemplu, pentru evaluare locatii eronate)
+require(ggrepel)
+
+harta.34400 <- ggplot(argos.34400, aes(x=Longitude, y=Latitude)) + geom_point()
+
+harta.34400
+
+detach("package:ggrepel", unload=TRUE)
+
+
+# Export pentru Movebank pentru aplicare filtre (PTT 34400 ca exemplu).
+# Atentie Movebank nu accepta fisiere cu date lipsa
+
+glimpse(argos.34400)
+
+argos.34400.movebank <- select(argos.34400, Platform.ID.No.,Loc..date, 
+                               Lat..sol..1, Long..1, Long..2, Lat..sol..2,
+                               Loc..quality, Loc..idx, Msg, X....120.DB, Best.level,
+                               Pass.dur...s., Nopc, Delta.freq., Altitude)
+
+# creare fisier txt pentru upload in Movebank
+
+write.table(argos.34400.movebank, file = "argos.34400.movebank.txt", sep = "\t",
+            row.names = FALSE, col.names = TRUE)
+
