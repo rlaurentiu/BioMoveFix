@@ -1,4 +1,4 @@
-setwd("E:/Dropbox/argos_errors/Bucuresti_mers")
+setwd("your_working_directory")
 require(SDLfilter) # first SDL and then dplyr!
 require(dplyr)
 
