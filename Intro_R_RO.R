@@ -1,4 +1,4 @@
-# Inainte de rula un scrip trebuie declarat directorul de lucru, adica 
+# Inainte de rula un script trebuie declarat directorul de lucru, adica 
 # directorul din care R va citi si in care va salva fisiere
 
 setwd("C:/Yourdirectory/Data")
