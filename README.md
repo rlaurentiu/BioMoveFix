@@ -6,7 +6,7 @@
 # BioMoveFix
 ## Prelucrare și filtrare date localizare Argos Doppler
 
-Pachetul de unelte pentru prelucrarea și filtrarea a datelor de localizare ARGOS Doppler:
+Pachetul de unelte pentru prelucrarea și filtrarea datelor de localizare ARGOS Doppler curpinde:
 
 1) **Scurtă introducere în R - script R**. Scriptul include câteva comenzi de bază pentru rularea pachetelor R prin intermediul RStudio pentru cei nefamiliarizați cu acest limbaj. După parcurgerea acestuia vă recomandăm să dedicați 3-4 ore pentru o mai bună asimilare urmând cursul gratuit [Datacamp](https://www.datacamp.com/courses/free-introduction-to-r). Datacamp are și un curs gratuit pentru RStudio care vă va învăța să lucrați eficient și reproductibil.
 2) **Tehnici de monitorizare a animalelor sălbatice - manual pdf**. Manualul prezintă informații privind tehnicile de analiză a mișcărilor animalelor sălbatice (radio VHF, GPS, Argos Doppler, geolocație prin nivel lumină), criterii de selectare a tehnologiei optime funcție de scopul cercetării și istoria naturală a speciei de interes, costurile estimative pentru fiecare metodă, producători principali, capturarea indivizilor în vederea atașării dispozitivelor de localizare, informații despre prelucrarea datelor brute de tip Argos Doppler, pachete software recomandate și literatura de bază pentru aprofundarea domeniului.
