@@ -1,6 +1,6 @@
 # Biomovefix
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://https://github.com/rlaurentiu/BioMoveFix/commit-activity)
 [![GitHub repo size in bytes](https://img.shields.io/github/repo-size/badges/shields.svg)](https://github.com/rlaurentiu/BioMoveFix)
-[![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg)](https://github.com/rlaurentiu/BioMoveFix)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
 
 De completat.. Work in progress
