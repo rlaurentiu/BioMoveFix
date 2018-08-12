@@ -16,6 +16,6 @@ Aceaste resurse sunt realizate în cadrul proiectului [Aplicații ARGOS pentru m
 
 În cazul în care întâmpinați dificultăți, nu ezitați să ne contactați.
 
-Resursa pusă la dispoziției poate fi citată prin intermediul depozitarului Zenodo. 
+Resursa pusă la dispoziție poate fi citată prin intermediul depozitarului Zenodo. 
 
 [![DOI](https://zenodo.org/badge/123764206.svg)](https://zenodo.org/badge/latestdoi/123764206)
