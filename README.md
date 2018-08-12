@@ -1,6 +1,6 @@
 # Biomovefix
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
-![GitHub package version](https://img.shields.io/github/package-json/v/badges/shields.svg)
+![GitHub package version](https://img.shields.io/github.com/rlaurentiu/BioMoveFix/v/badges/shields.svg)
 [![Package Control total downloads](https://img.shields.io/packagecontrol/dt/SwitchDictionary.svg)](https://packagecontrol.io/packages/SwitchDictionary)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
 
