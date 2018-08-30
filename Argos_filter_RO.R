@@ -1,11 +1,11 @@
-# Pregatirea setului de date Argos pentru filtrare
+## Pregatirea setului de date Argos pentru filtrare
 
 # Declaram directorul in care lucram. De exemplu C:/Lucru/Argos
 # Atentie calea spre director trebuie declarata folosint back slash
 # C:/Lucru/Argos si NU C:\Lucru\Argos
 # setwd("C:/Lucru/Argos")
 
-setwd("E:/OneDrive/argos_errors/BioMoveFix-master")
+setwd("yourdirectorypath")
 
 # Instalam pachetele cu care vom lucra. Aceasta operatie se face doar
 # prima data. Daca rerulati scriptul atunci puteti trece peste aceasta
@@ -46,7 +46,7 @@ Argos_data <- read.csv(file = "argos_data.csv",
 
 glimpse(Argos_data)
 
-# Filtru pentru eliminarea duplicatelor
+## Filtru pentru eliminarea duplicatelor
 
 # Dupa importul setului de date vom sterge datele duplicate. Date Argos exportate
 # in format csv includ duplicate pentru fiecare localizare, constand din mesaje
@@ -72,7 +72,7 @@ argos.dup <-
 # Functia *distinct* a pastrat 521 localizarii din 2681 de mesaje initiale.
 
 
-# Filtru eliminare inregistrari fara coordonate si data de localizare
+## Filtru eliminare inregistrari fara coordonate si data de localizare
 
 # Din noul set de date *argos.dup* vom  elimina succesiv inregistrarile cu NA
 # (lipsa date) in coloanele Loc..date, Longitude, Latitude. Acestea sunt
@@ -89,7 +89,7 @@ argos.dup.3 <-   filter(argos.dup.2, !is.na(Latitude))
 # in situatii reale vom avea cu siguranta mai multe cazuri
 
 
-# Explorarea datelor
+## Explorarea datelor
 
 # Putem explora setul de date, pentru a intelege variabilitatea localizarilor,
 # de exemplu numaram localizarile per individ (PTT)
@@ -142,7 +142,7 @@ harta_Saveni
 write.csv(argos.dup.3, file = "argos_clean.csv")
 
 
-# Filtru calitate localizari Argos (Loc..quality).
+## Filtru calitate localizari Argos (Loc..quality).
 
 # Filtrul elimina localizarile considerate ca avand eroare prea mare
 # (de exemplu LC0, LCA si LCB care nu au eroare estimata).
@@ -160,7 +160,7 @@ count_LC <- table(argos.dup.3$Loc..quality)
 barplot(count_LC, xlab="Clasa de eroare", ylab="Numar inregistrari")
 
 
-## Cream un set de date filtrat cu clasele de eroare 3, 2 si 1
+# Cream un set de date filtrat cu clasele de eroare 3, 2 si 1
 
 
 argos.LC321 <-
@@ -195,7 +195,7 @@ harta2
 latticeView(harta1, harta2, sync.cursor = TRUE)
 
 
-# acceasi reprezentare grafica cu functia plot si libraria rgdal
+# aceeasi reprezentare grafica cu functia plot si libraria rgdal
 # genereaza un grafic e marime mai mica
 
 library(sp)
@@ -243,7 +243,7 @@ harta1
 write.csv(argos.LC321, file = "argos_LC321.csv")
 
 
-# Filtru de viteza
+## Filtru de viteza
 
 # detasam pachetele incarcate pana acum
 
@@ -440,7 +440,7 @@ detach("package:mapview")
 detach("package:SDLfilter")
 detach("package:argosfilter")
 
-# Pregatirea datelor pentru filtrul Douglas-Argos.
+## Pregatirea datelor pentru filtrul Douglas-Argos.
 
 
 # Filtrul Douglas-Argos este disponibil numai in platforma Movebank
