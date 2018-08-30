@@ -1,4 +1,4 @@
-## Pregatirea setului de date Argos pentru filtrare
+## **Pregatirea setului de date Argos pentru filtrare**
 
 # Declaram directorul in care lucram. De exemplu C:/Lucru/Argos
 # Atentie calea spre director trebuie declarata folosint back slash
