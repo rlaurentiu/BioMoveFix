@@ -2,10 +2,10 @@
 
 # Declaram directorul in care lucram. De exemplu C:/Lucru/Argos
 # Atentie calea spre director trebuie declarata folosint back slash
-# C:/Lucru/Argos si NU C:\Lucru\Argos
+# C:/Lucru/Argos si NU C:\Lucru\Argos (inlocuim mydirectory), de ex.,
 # setwd("C:/Lucru/Argos")
 
-setwd("yourdirectorypath")
+setwd("mydirectory")
 
 # Instalam pachetele cu care vom lucra. Aceasta operatie se face doar
 # prima data. Daca rerulati scriptul atunci puteti trece peste aceasta
@@ -17,7 +17,6 @@ install.packages("mapview")
 install.packages("gdalUtils")
 install.packages("argosfilter")
 install.packages("SDLfilter")
-
 
 # Activam pachetul R dplyr. Tutorialul pentru acest pachet R este la adresa web
 # https://dplyr.tidyverse.org/
@@ -71,8 +70,7 @@ argos.dup <-
 
 # Functia *distinct* a pastrat 521 localizarii din 2681 de mesaje initiale.
 
-
-## Filtru eliminare inregistrari fara coordonate si data de localizare
+## Filtru eliminare inregistrari fara coordonate si marca temporala (data localizare)
 
 # Din noul set de date *argos.dup* vom  elimina succesiv inregistrarile cu NA
 # (lipsa date) in coloanele Loc..date, Longitude, Latitude. Acestea sunt
@@ -83,11 +81,9 @@ argos.dup.1 <-   filter(argos.dup, !is.na(Loc..date))
 argos.dup.2 <-   filter(argos.dup.1, !is.na(Longitude))
 argos.dup.3 <-   filter(argos.dup.2, !is.na(Latitude))
 
-
 # Setul de date final *argos.dup3* reprezinta un set de date prelucrat, gata
 # pentru utilizare in analize. S-a eliminat doar o inregistrare, dar in
 # in situatii reale vom avea cu siguranta mai multe cazuri
-
 
 ## Explorarea datelor
 
@@ -104,6 +100,10 @@ counts <- table(argos.dup.3$Platform.ID.No.)
 
 barplot(counts, xlab = "individ monitorizat", ylab = "numar localizari per individ")
 
+# salvam graficul in format png
+
+dev.copy(png,'localiz_per_individ.png')
+dev.off()
 
 # Pentru o mai buna intelegere a datelor putem vizualiza localizarile cu ajutorul
 # pachetelor mapview si sp. Atentie daca pachetele nu sunt disponibile atunci
@@ -127,11 +127,9 @@ proj4string(argos_harta) <- CRS("+init=epsg:4326")
 # Atentie! harta este interactiva si are functii de zoom, selectare animal,
 # schimbare de harta fundal
 
-
 harta_Saveni <- mapview(argos_harta,
                         zcol = "Platform.ID.No.",
                         burst = TRUE)
-
 harta_Saveni
 
 # Hartile create au dimensiuni mari, astfel ca pentru reprezentari grafice
@@ -141,7 +139,6 @@ harta_Saveni
 
 write.csv(argos.dup.3, file = "argos_clean.csv")
 
-
 ## Filtru calitate localizari Argos (Loc..quality).
 
 # Filtrul elimina localizarile considerate ca avand eroare prea mare
@@ -150,23 +147,23 @@ write.csv(argos.dup.3, file = "argos_clean.csv")
 argos.dup.3$Loc..quality <- factor(argos.dup.3$Loc..quality,
                                    levels = c("3", "2", "1", "0", "A", "B"))
 
-
 # Construim un tabel cu numarul de localizari dupa clasa de eroare si
 # vizualizam sub forma de diagrama barplot
-
 
 count_LC <- table(argos.dup.3$Loc..quality)
 
 barplot(count_LC, xlab="Clasa de eroare", ylab="Numar inregistrari")
 
+# salvam graficul in format png
+
+dev.copy(png,'clase_err_nr_inregistrari.png')
+dev.off()
 
 # Cream un set de date filtrat cu clasele de eroare 3, 2 si 1
-
 
 argos.LC321 <-
   filter(argos.dup.3,
          Loc..quality == 3 | Loc..quality == 2 | Loc..quality == 1)
-
 # Vizualizam harta cu datele filtrate si date nefiltrate
 
 argos_harta <- argos.dup.3
@@ -175,7 +172,6 @@ coordinates(argos_harta) <- ~ Longitude + Latitude
 proj4string(argos_harta) <- "+init=epsg:4326"
 harta1 <- mapview(argos_harta, zcol = "Loc..quality", burst = TRUE)
 harta1
-
 
 argos_hartaLC321 <- argos.LC321
 
@@ -193,7 +189,6 @@ harta2
 # le vizualizam una langa alta pentru comparatie
 
 latticeView(harta1, harta2, sync.cursor = TRUE)
-
 
 # aceeasi reprezentare grafica cu functia plot si libraria rgdal
 # genereaza un grafic e marime mai mica
@@ -231,7 +226,7 @@ dev.off()
 # Daca nu dorim sa le fitram fizic putem utiliza sp si mapview sa exploram setul
 # de date, folosind variabila Loc..quality pentru legenda (debifam in viewer
 # locatiile # care au erori...de exemplu in setul nostru de date erorile
-# provim din LC 0 si LC B, dar obsevam si ca aplicand filtrul distructiv
+# provin din LC 0 si LC B, dar obsevam si ca aplicand filtrul distructiv
 # vom elimina multe locatii valoaroase)
 # pentru aceasta vizualizam harta mapview cu toate locatiile (harta1)
 
@@ -241,7 +236,6 @@ harta1
 # cazul nostrul setul de date cu LC3, LC2 si LC1
 
 write.csv(argos.LC321, file = "argos_LC321.csv")
-
 
 ## Filtru de viteza
 
@@ -266,7 +260,6 @@ library(dplyr)
 Argos_clean <- read.csv(file = "argos_clean.csv",
                         header = TRUE,
                         as.is = TRUE)
-
 
 # Redenumim coloanele pentru a putea lucra cu functiile SDL filter
 # (vezi documentatie SDLfilter)
@@ -300,7 +293,6 @@ glimpse(argos.renamed$DateTime1)
 # Toate au in fata semnul %. Mai multe detalii despre formatul data/timp in
 # R aici https://www.stat.berkeley.edu/~s133/dates.html
 
-
 # Transformam data din format chr (caracter) in format dttm (date time)si o
 # copiem intr-un camp nou DateTime
 
@@ -314,13 +306,12 @@ argos.renamed$DateTime <-
 
 glimpse(argos.renamed$DateTime)
 
-
 # Dupa fixarea datei putem lucra cu filtrele de viteza, de
 # exemplu putem estima viteza maxima pentru deplasare in circuit.
 
 maxvlp <- est.maxvlp(argos.renamed)
 
-# Estiman viteza maxima pentru punctele cu mai mult de n mesaje PTT.
+viteza maxima pentru punctele cu mai mult de n mesaje PTT.
 # Pentru aceasta ordonam clasele de eroare de la mare la mica si
 # apoi reprezentam grafic clasa de eroare vs numarul de mesaje per
 # localizare
@@ -377,7 +368,6 @@ coordinates(argos.speed4) <- ~ lon + lat
 proj4string(argos.speed4) <- "+init=epsg:4326"
 harta.speed <- mapview(argos.speed4, zcol = "id", burst = TRUE)
 harta.speed
-
 
 latticeView(harta.brut, harta.speed, sync.cursor = TRUE)
 
@@ -442,7 +432,6 @@ detach("package:argosfilter")
 
 ## Pregatirea datelor pentru filtrul Douglas-Argos.
 
-
 # Filtrul Douglas-Argos este disponibil numai in platforma Movebank
 # Experienta noastra a demonstrat ca varianta DAR a Douglas-Argos
 # este un filtru robust pentru conditiile din Romania
@@ -451,7 +440,6 @@ detach("package:argosfilter")
 # Daca nu le avem create atunci vom curata datele  pana la linia 122 din script
 # (stergerea duplicatelor, stergerea inregistrarilor cu NA pentru marca temporala,
 # longitudine, latitudine)
-
 
 Argos_clean <- read.csv(file = "argos_clean.csv",
                         header = TRUE,
@@ -463,7 +451,6 @@ library(dplyr)
 # il alfam cu functia glimpse
 
 glimpse(Argos_clean)
-
 
 argos.movebank <-
   rename(
@@ -491,7 +478,6 @@ argos.movebank <-
 # https://www.movebank.org/node/11. De asemenea detalii despre cum rulam filtrul
 # gasim aici https://www.movebank.org/node/38 si in articolul open source
 # https://besjournals.onlinelibrary.wiley.com/doi/abs/10.1111/j.2041-210X.2012.00245.x
-
 
 write.table(
   argos.movebank,
