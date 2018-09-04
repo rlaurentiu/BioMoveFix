@@ -2,14 +2,14 @@
 
 # Declaram directorul in care lucram. De exemplu C:/Lucru/Argos
 # Atentie calea spre director trebuie declarata folosint back slash
-# C:/Lucru/Argos si NU C:\Lucru\Argos (inlocuim mydirectory), de ex.,
+# C:/Lucru/Argos si NU C:\Lucru\Argos (cand inlocuim mydirectory), de ex.,
 # setwd("C:/Lucru/Argos")
 
 setwd("mydirectory")
 
-# Instalam pachetele cu care vom lucra. Aceasta operatie se face doar
+# Instalam pachetele R cu care vom lucra. Aceasta operatie se face doar
 # prima data. Daca rerulati scriptul atunci puteti trece peste aceasta
-# operatie.
+# operatie. Invalidati comanda punand un diez (#) in fata ei.
 
 install.packages("dplyr")
 install.packages("sp")
@@ -24,7 +24,7 @@ install.packages("SDLfilter")
 library(dplyr)
 
 # Se incarca fisierul cu date brute Argos (export csv din Argos CLS, cu datele de
-# diagnostic). Vom lucra cu date Argos PTT Geotrack 23G SOLAR PTT
+# diagnostic). Vom lucra cu date Argos de la 5 PTT Geotrack 23G SOLAR PTT
 # obtinute in cadrul proiectului PN-III-P2-2.1-PED-2016-056 finantat de UEFISCDI
 # (http://ccmesi.ro/?page_id=47).
 # Setul de date demonstrativ cuprinde 2681 observatii nefiltrate si
@@ -164,6 +164,7 @@ dev.off()
 argos.LC321 <-
   filter(argos.dup.3,
          Loc..quality == 3 | Loc..quality == 2 | Loc..quality == 1)
+
 # Vizualizam harta cu datele filtrate si date nefiltrate
 
 argos_harta <- argos.dup.3
@@ -330,7 +331,7 @@ vmax4 <- est.vmax(argos.renamed, qi = 7, prob = 0.99)
 # in acest moment avem toate elementele pentru a aplica filtrul de viteza.
 # Viteza maxima plauzibila este de 17.7 km/h deci 18. Metoda 1 reprezinta
 # modul in care se calculeaza daca punctele depasesc vmax. 1 punctul A si
-# punctul subsecvent B, 2 concomitent intre A' A si A si B. Metoda 1 este
+# punctul subsecvent B, 2 concomitent intre A' A si A B. Metoda 1 este
 # mai radicala, metoda 2 elimina mai putine puncte. Recomandam metoda 1
 
 argos.speed4 <- ddfilter.speed(argos.renamed, vmax = 18, method = 1)
