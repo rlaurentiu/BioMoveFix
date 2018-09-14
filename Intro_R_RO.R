@@ -8,7 +8,7 @@ setwd("C:/Yourdirectory/Data")
 getwd()
 
 # R atribuie nume la obiecte (liste, seturi de date, figuri, scripturi)
-# folosind operatorul <-. Numele nu trebuie sa includa spatii
+# folosind operatorul <-. Numele obiectelor nu trebuie sa includa spatii
 
 datele.mele <- 3+2
 
