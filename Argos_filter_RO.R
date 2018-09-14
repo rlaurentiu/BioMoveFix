@@ -57,7 +57,7 @@ glimpse(Argos_data)
 # localizarii). In acest fel excludem posibilitatea sa stergem gresit mesajele.
 # Numele corecte ale variabilelor le identificam cu functia glimpse ca mai sus.
 # Atentie, daca rulati scriptul cu date proprii introduceti in cod numele variabilelor
-# din setul Dvs. de date. Orice inadvertenta conduce la erori
+# din setul Dvs. de date. Orice inadvertenta conduce la erori.
 # Prin codul de mai jos cream un set de date (argos.dup) fara duplicate
 
 argos.dup <-
