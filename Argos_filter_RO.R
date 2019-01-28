@@ -3,7 +3,7 @@
 # Declaram directorul in care lucram. De exemplu C:/Lucru/Argos
 # Atentie calea spre director trebuie declarata folosint back slash
 # C:/Lucru/Argos si NU C:\Lucru\Argos (cand inlocuim mydirectory), de ex.,
-# setwd("C:/Lucru/Argos")
+# setwd("C:/Lucru/Argos").
 
 setwd("mydirectory")
 
