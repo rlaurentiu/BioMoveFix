@@ -10,6 +10,7 @@ setwd("mydirectory")
 # Instalam pachetele R cu care vom lucra. Aceasta operatie se face doar
 # prima data. Daca rerulati scriptul atunci puteti trece peste aceasta
 # operatie. Invalidati comanda punand semnul diez (#) in fata ei.
+# Semnul diez se utilizează și pentru comentarii.
 
 install.packages("dplyr")
 install.packages("sp")
